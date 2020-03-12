@@ -12,8 +12,8 @@ There have been a few iterations. Until quite recently, the main way to create c
 
 ```jsx live=true
 class Counter extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
       count: 0,
@@ -44,7 +44,7 @@ render(<Counter />)
 
 ---
 
-# Don't worry too much
+# Don't worry too much!!!!!
 
 We're focusing on _hooks_ in this course.
 
@@ -61,7 +61,7 @@ It's important to be aware of classes, since many online resources will use them
 ```jsx
 const [count, setCount] = React.useState(0);
 
-// Initialization
+// Initialization olld-school 
 React.useState(0) === this.state = { count: 0 }
 
 // Accessing the state value
