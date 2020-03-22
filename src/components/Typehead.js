@@ -5,6 +5,9 @@ import styled from "styled-components";
 
 function Typehead({ handleSelect, suggestions }) {
   let [data, setData] = useState("");
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = React.useState(
+    0
+  );
   //console.log(suggestions, "xxxSuggestionsxxxx"); suggestions is my book array
   //console.log("________--------", typeof data); data is simply string
   let matches = suggestions.filter(x => {
@@ -19,7 +22,7 @@ function Typehead({ handleSelect, suggestions }) {
   const handleTitle = (title, char) => {
     const firstHalf = title.slice(0, char);
     const secondHalf = title.slice(char);
-    console.log(char, "CHAR");
+    // console.log(char, "CHAR");
     return [firstHalf, secondHalf];
   };
   //console.log(splitOne);
@@ -28,24 +31,65 @@ function Typehead({ handleSelect, suggestions }) {
       <InputText
         type="text"
         value={data}
+        {...console.log(typeof data, "---------")}
         onChange={ev => setData(ev.target.value)}
+        onKeyDown={ev => {
+          console.log("HERE");
+          switch (ev.key) {
+            case "Enter": {
+              handleSelect(ev.target.value);
+              return;
+            }
+            case "ArrowUp": {
+              console.log(
+                matches.length,
+                "-------",
+                selectedSuggestionIndex,
+                "HIIIIIIIIIIIIIII"
+              );
+              ev.preventDefault();
+              if (selectedSuggestionIndex > 0)
+                setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
+              break;
+              console.log("ARROW-UP");
+            }
+            case "ArrowDown": {
+              console.log(
+                matches.length,
+                "-------",
+                selectedSuggestionIndex,
+                "HERRE"
+              );
+              ev.preventDefault();
+              if (selectedSuggestionIndex < matches.length - 1)
+                setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
+              console.log("ArrowDown");
+              break;
+            }
+          }
+        }}
       ></InputText>
       <MyButton onClick={() => setData("")}>Liverpool Sucks</MyButton>
       {/* {console.log(matches, "____------____----")} */}
       {matches.length > 0 ? (
         <ContainList>
-          {matches.map(match => {
-            const parsedTitle = handleTitle(match.title, matches.length - 1);
+          {matches.map((match, index) => {
+            let isSelected = index === selectedSuggestionIndex;
+            const parsedTitle = handleTitle(match.title, data.length);
             //console.log(parsedTitle[0], "Whats happening----");
             return (
               <DaList
                 key={match.title}
-                onClick={() => handleSelect(match.title)}
+                style={{
+                  background: isSelected ? "blue" : "transparent",
+                  color: isSelected ? "white" : "black"
+                }}
+                onClick={ev => handleSelect(match.title)}
               >
                 <span>
                   {parsedTitle[0]}
                   <BoldSpan>{parsedTitle[1]}</BoldSpan>
-                  <Category>{match.categoryId}</Category>
+                  <Category> {match.categoryId}</Category>
                 </span>
               </DaList>
             );

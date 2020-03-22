@@ -83,7 +83,7 @@ Your code should look something like this:
 
 ```jsx
 const Typeahead = ({ suggestions, handleSelect }) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   return (
     <>
@@ -92,13 +92,13 @@ const Typeahead = ({ suggestions, handleSelect }) => {
         value={value}
         onChange={ev => setValue(ev.target.value)}
         onKeyDown={ev => {
-          if (ev.key === 'Enter') {
+          if (ev.key === "Enter") {
             handleSelect(ev.target.value);
           }
         }}
       />
 
-      <button onClick={() => setValue('')}>Clear</button>
+      <button onClick={() => setValue("")}>Clear</button>
     </>
   );
 };
@@ -191,7 +191,7 @@ Give it a shot, and then check the solution below:
 
 ```jsx
 const Typeahead = ({ suggestions, handleSelect }) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
 
   return (
     <Wrapper>
@@ -324,15 +324,17 @@ We're already listening for keypresses, since we're calling the handler when the
     // ev.key. This is an optional change, though; we could
     // still do it with if/else-if.
     switch (ev.key) {
-      case 'Enter': {
+      case "Enter": {
         handleSelect(ev.target.value);
         return;
       }
-      case 'ArrowUp': {
+      case "ArrowUp": {
         // TODO: Handle moving the selection up
+        return;
       }
-      case 'ArrowDown': {
+      case "ArrowDown": {
         // TODO: Handle moving the selection down
+        return;
       }
     }
   }}
@@ -351,7 +353,7 @@ const Typeahead = (
     /* snip */
   }
 ) => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState("");
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = React.useState(
     0
   );
@@ -361,15 +363,15 @@ const Typeahead = (
     <input
       onKeyDown={ev => {
         switch (ev.key) {
-          case 'Enter': {
+          case "Enter": {
             handleSelect(ev.target.value);
             return;
           }
-          case 'ArrowUp': {
+          case "ArrowUp": {
             // TODO: Handle moving the selection up
             setSelectedSuggestionIndex(selectedSuggestionIndex - 1);
           }
-          case 'ArrowDown': {
+          case "ArrowDown": {
             // TODO: Handle moving the selection down
             setSelectedSuggestionIndex(selectedSuggestionIndex + 1);
           }
@@ -444,16 +446,16 @@ HINT: One strategy is to create your own data structure, like this:
 ```js
 const groupedSuggestions = [
   {
-    categoryName: 'Science Fiction & Fantasy',
+    categoryName: "Science Fiction & Fantasy",
     suggestions: [
       {
         /* Book 1 */
       },
       {
         /* Book 2 */
-      },
-    ],
-  },
+      }
+    ]
+  }
 ];
 ```
 
