@@ -46,6 +46,14 @@ const ListItem = styled.li`
     border-bottom: none;
   }
 `
+// in CSS 
+/// .class {
+  //border-bottom: 1px solid;
+//}
+
+// .class:last-of-type{
+  //border-bottom: none;
+//}
 ```
 
 ---
